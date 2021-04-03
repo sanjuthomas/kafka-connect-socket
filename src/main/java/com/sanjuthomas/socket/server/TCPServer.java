@@ -16,7 +16,6 @@
 
 package com.sanjuthomas.socket.server;
 
-import com.sanjuthomas.socket.server.ServerSocketConnectorConfig;
 import java.util.concurrent.BlockingQueue;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +38,7 @@ public class TCPServer {
     new Thread(() -> {
       DisposableServer server =
         TcpServer.create()
-          .port(config.myTcpPort())
+          .port(config.port())
           .handle((inbound, outbound) -> inbound.receive()
             .asString()
             .flatMap(message -> {

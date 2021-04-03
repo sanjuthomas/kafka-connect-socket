@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Sanju Thomas
+ * Copyright (c) 2021 Sanju Thomas
  * Licensed under the MIT License (the "License");
  * You may not use this file except in compliance with the License.
  *
@@ -16,8 +16,6 @@
 
 package com.sanjuthomas.socket.client;
 
-import com.sanjuthomas.socket.server.ServerSocketConnectorConfig;
-import com.sanjuthomas.socket.server.TCPServer;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -52,7 +50,8 @@ public class ClientSocketSourceTask extends SourceTask {
   @Override
   public List<SourceRecord> poll() throws InterruptedException {
     log.trace("ClientSocketSourceTask poll called");
-    return List.of(new SourceRecord(null, null, config.topic(), 0, Schema.STRING_SCHEMA, queue.take()));
+    return List
+      .of(new SourceRecord(null, null, config.topic(), 0, Schema.STRING_SCHEMA, queue.take()));
   }
 
   @Override

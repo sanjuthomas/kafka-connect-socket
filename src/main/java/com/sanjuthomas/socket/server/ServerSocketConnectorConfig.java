@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Sanju Thomas
+ * Copyright (c) 2021 Sanju Thomas
  * Licensed under the MIT License (the "License");
  * You may not use this file except in compliance with the License.
  *
@@ -43,11 +43,11 @@ public class ServerSocketConnectorConfig extends AbstractConfig {
 
   public static ConfigDef conf() {
     return new ConfigDef()
-      .define(TCP_PORT, Type.INT, Importance.HIGH, TCP_PORT_DOC)
+      .define(TCP_PORT, Type.INT, 12000, Importance.HIGH, TCP_PORT_DOC)
       .define(TOPIC, Type.STRING, Importance.HIGH, TOPIC_DOC);
   }
 
-  public Integer myTcpPort() {
+  public Integer port() {
     return this.getInt(TCP_PORT);
   }
 

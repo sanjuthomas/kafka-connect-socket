@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Sanju Thomas
+ * Copyright (c) 2021 Sanju Thomas
  * Licensed under the MIT License (the "License");
  * You may not use this file except in compliance with the License.
  *
@@ -51,11 +51,13 @@ public class ClientSocketConnectorConfig extends AbstractConfig {
       .define(TOPIC, Type.STRING, Importance.HIGH, TOPIC_DOC);
   }
 
-  public Integer theirTcpPort() {
+  public Integer port() {
     return this.getInt(TCP_PORT);
   }
 
-  public String theirTcpHost() { return this.getString(TCP_HOST); }
+  public String host() {
+    return this.getString(TCP_HOST);
+  }
 
   public String topic() {
     return this.getString(TOPIC);

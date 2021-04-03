@@ -34,8 +34,8 @@ public class TcpClient {
   public void start() {
     new Thread(() -> {
       reactor.netty.tcp.TcpClient.create()
-        .host("localhost")
-        .port(12001)
+        .host(config.host())
+        .port(config.port())
         .handle((inbound, outbound) -> inbound.receive()
           .asString()
           .flatMap(message -> {
