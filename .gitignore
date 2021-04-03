@@ -1,0 +1,9 @@
+/target/
+/.settings/
+/.project
+/.classpath
+/dependency-reduced-pom.xml
+kafka-connect-socket.iml
+.idea
+.DS_Store
+release.properties
