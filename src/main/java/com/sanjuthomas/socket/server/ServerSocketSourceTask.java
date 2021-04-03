@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Sanju Thomas
+ * Copyright (c) 2020 Sanju Thomas
  * Licensed under the MIT License (the "License");
  * You may not use this file except in compliance with the License.
  *
@@ -14,9 +14,8 @@
  * and limitations under the License.
  */
 
-package com.sanjuthomas.socket;
+package com.sanjuthomas.socket.server;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -49,13 +48,9 @@ public class ServerSocketSourceTask extends SourceTask {
   }
 
   @Override
-  public List<SourceRecord> poll() {
-    log.info("ServerSocketSourceTask poll called");
-    final List<SourceRecord> records = new ArrayList<>();
-    final String message = queue.poll();
-    if(null != message) records.add(new SourceRecord(null, null, config.topic(), 0, Schema.STRING_SCHEMA, message));
-    if(records.isEmpty()) return null;
-    return records;
+  public List<SourceRecord> poll() throws InterruptedException {
+    log.trace("ServerSocketSourceTask poll called");
+    return List.of(new SourceRecord(null, null, config.topic(), 0, Schema.STRING_SCHEMA, queue.take()));
   }
 
   @Override

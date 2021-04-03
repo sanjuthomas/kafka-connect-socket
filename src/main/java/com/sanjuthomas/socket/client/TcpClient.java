@@ -14,44 +14,40 @@
  * and limitations under the License.
  */
 
-package com.sanjuthomas.socket;
-
-import java.util.concurrent.BlockingQueue;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import reactor.core.publisher.Mono;
-import reactor.netty.DisposableServer;
-import reactor.netty.tcp.TcpServer;
-
 /**
  * @author Sanju Thomas
  */
+package com.sanjuthomas.socket.client;
 
-@AllArgsConstructor
+import java.util.concurrent.BlockingQueue;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
+
+@RequiredArgsConstructor
 @Slf4j
-public class TCPServer {
+public class TcpClient {
 
-  private final ServerSocketConnectorConfig config;
+  private final ClientSocketConnectorConfig config;
   private final BlockingQueue<String> queue;
 
   public void start() {
     new Thread(() -> {
-      DisposableServer server =
-        TcpServer.create()
-          .port(config.myTcpPort())
-          .handle((inbound, outbound) -> inbound.receive()
-            .asString()
-            .flatMap(message -> {
-              try {
-                log.info("message arrived - {}", message);
-                queue.put(message);
-              } catch (InterruptedException e) {
-                log.error(e.getMessage(), e);
-              }
-              return Mono.empty();
-            }))
-          .bindNow();
-      server.onDispose().block();
+      reactor.netty.tcp.TcpClient.create()
+        .host("localhost")
+        .port(12001)
+        .handle((inbound, outbound) -> inbound.receive()
+          .asString()
+          .flatMap(message -> {
+            try {
+              log.trace("message arrived - {}", message);
+              queue.put(message);
+            } catch (InterruptedException e) {
+              log.error(e.getMessage(), e);
+            }
+            return Mono.empty();
+          }))
+        .connectNow();
     }).start();
   }
 }

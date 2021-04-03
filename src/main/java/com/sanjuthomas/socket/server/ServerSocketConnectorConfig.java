@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Sanju Thomas
+ * Copyright (c) 2020 Sanju Thomas
  * Licensed under the MIT License (the "License");
  * You may not use this file except in compliance with the License.
  *
@@ -14,7 +14,7 @@
  * and limitations under the License.
  */
 
-package com.sanjuthomas.socket;
+package com.sanjuthomas.socket.server;
 
 import java.util.Map;
 import org.apache.kafka.common.config.AbstractConfig;
