@@ -4,11 +4,11 @@ Kafka Connect Socket read messages over TCP Socket. This connector can either ac
 
 #### How to start in server mode
 
-<kafka_home>/bin/connect-standalone.sh config/connect-standalone.properties config/[server-socket-source.properties] () 
+<kafka_home>/bin/connect-standalone.sh config/connect-standalone.properties config/[server-socket-source.properties] (https://github.com/sanjuthomas/kafka-connect-socket/blob/master/etc/server-socket-source.properties) 
 
 #### How to start in client mode
 
-/bin/connect-standalone.sh config/connect-standalone.properties config/[client-socket-source.properties] ()
+/bin/connect-standalone.sh config/connect-standalone.properties config/[client-socket-source.properties] (https://github.com/sanjuthomas/kafka-connect-socket/blob/master/etc/client-socket-source.properties)
 
 In the client mode, the connector expect the server socket to be available before you start the connector.
 
