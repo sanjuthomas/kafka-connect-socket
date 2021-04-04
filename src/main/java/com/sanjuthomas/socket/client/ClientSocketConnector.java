@@ -14,8 +14,9 @@
  * and limitations under the License.
  */
 
-package com.sanjuthomas.socket;
+package com.sanjuthomas.socket.client;
 
+import com.sanjuthomas.socket.server.ServerSocketConnectorConfig;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,7 @@ import org.apache.kafka.connect.source.SourceConnector;
  * @author Sanju Thomas
  */
 @Slf4j
-public class ServerSocketConnector extends SourceConnector {
+public class ClientSocketConnector extends SourceConnector {
 
   private Map<String, String> config;
 
@@ -42,13 +43,13 @@ public class ServerSocketConnector extends SourceConnector {
 
   @Override
   public void start(Map<String, String> map) {
-    log.info("Starting ServerSocketConnector.....");
+    log.info("Starting ClientSocketConnector.....");
     config = new HashMap<>(map);
   }
 
   @Override
   public Class<? extends Task> taskClass() {
-    return ServerSocketSourceTask.class;
+    return ClientSocketSourceTask.class;
   }
 
   @Override

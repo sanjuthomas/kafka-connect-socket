@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Sanju Thomas
+ * Copyright (c) 2021 Sanju Thomas
  * Licensed under the MIT License (the "License");
  * You may not use this file except in compliance with the License.
  *
@@ -16,21 +16,29 @@
 
 package com.sanjuthomas.socket;
 
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
-import reactor.netty.Connection;
 import reactor.netty.tcp.TcpClient;
 
-public class SocketSendClient {
+@Slf4j
+public class TcpClientTest {
 
-  public static void main(String[] args) {
-    Connection connection =
+  public static void main(String[] args) throws InterruptedException {
+
+    new Thread(() -> {
       TcpClient.create()
         .host("localhost")
-        .port(12000)
-        .handle((inbound, outbound) -> outbound.sendString(Mono.just("{\"id\" : \"ass\"}")))
-        .connectNow();
-    connection.onDispose()
-      .block();
-  }
+        .port(12001)
+        .handle((inbound, outbound) -> inbound.receive()
+          .asString()
+          .flatMap(message -> {
+            System.out.println(message);
 
+            return Mono.empty();
+          }))
+        .connectNow();
+    }).start();
+
+     Thread.sleep(1000000);
+  }
 }

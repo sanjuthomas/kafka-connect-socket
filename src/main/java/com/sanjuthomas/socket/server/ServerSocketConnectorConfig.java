@@ -14,7 +14,7 @@
  * and limitations under the License.
  */
 
-package com.sanjuthomas.socket;
+package com.sanjuthomas.socket.server;
 
 import java.util.Map;
 import org.apache.kafka.common.config.AbstractConfig;
@@ -43,11 +43,11 @@ public class ServerSocketConnectorConfig extends AbstractConfig {
 
   public static ConfigDef conf() {
     return new ConfigDef()
-      .define(TCP_PORT, Type.INT, Importance.HIGH, TCP_PORT_DOC)
+      .define(TCP_PORT, Type.INT, 12000, Importance.HIGH, TCP_PORT_DOC)
       .define(TOPIC, Type.STRING, Importance.HIGH, TOPIC_DOC);
   }
 
-  public Integer myTcpPort() {
+  public Integer port() {
     return this.getInt(TCP_PORT);
   }
 
