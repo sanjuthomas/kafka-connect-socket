@@ -33,6 +33,9 @@ public class ClientSocketConnectorConfig extends AbstractConfig {
   private static final String TCP_PORT = "their.tcp.port";
   private static final String TCP_PORT_DOC = "Their tcp port to connect";
 
+  private static final String RECONNECT_DELAY = "reconnect.delay.seconds";
+  private static final String RECONNECT_DELAY_DOC = "How many seconds to wait before attempting to reconnect to the server socket";
+
   private static final String TOPIC = "topic";
   private static final String TOPIC_DOC = "Topic to with the messages should be written?";
 
@@ -46,6 +49,7 @@ public class ClientSocketConnectorConfig extends AbstractConfig {
 
   public static ConfigDef conf() {
     return new ConfigDef()
+      .define(RECONNECT_DELAY, Type.INT, Importance.HIGH, RECONNECT_DELAY_DOC)
       .define(TCP_HOST, Type.STRING, Importance.HIGH, TCP_HOST_DOC)
       .define(TCP_PORT, Type.INT, Importance.HIGH, TCP_PORT_DOC)
       .define(TOPIC, Type.STRING, Importance.HIGH, TOPIC_DOC);
@@ -62,4 +66,6 @@ public class ClientSocketConnectorConfig extends AbstractConfig {
   public String topic() {
     return this.getString(TOPIC);
   }
+
+  public Integer reconnectDelay() { return this.getInt(RECONNECT_DELAY); }
 }
