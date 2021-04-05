@@ -17,28 +17,25 @@
 package com.sanjuthomas.socket;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
-import reactor.netty.tcp.TcpClient;
 
-@Slf4j
-public class TcpClientTest {
 
-  public static void main(String[] args) throws InterruptedException {
+class TcpClientTest {
 
-    new Thread(() -> {
-      TcpClient.create()
-        .host("localhost")
-        .port(12001)
-        .handle((inbound, outbound) -> inbound.receive()
-          .asString()
-          .flatMap(message -> {
-            System.out.println(message);
+  private TcpClient tcpClient;
 
-            return Mono.empty();
-          }))
-        .connectNow();
-    }).start();
-
-     Thread.sleep(1000000);
+  @BeforeEach
+  void setUp() {
+    tcpClient = new TcpClient() {
+    }
   }
+
+  @Test
+  void shouldStartClient() {
+
+
+  }
+
 }
